@@ -1,0 +1,45 @@
+<%# frozen_string_literal: true %>
+<%%= simple_form_for(@<%= singular_table_name %>, data: { controller: "block-ui-form" }) do |f| %>
+  <%%= f.error_notification %>
+  <%%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+
+  <%- attributes.each do |attribute| -%>
+    <div class="row border-bottom">
+      <div class="col-md-12 pt-3">
+      <%- if attribute.type.to_s == "string" or attribute.type.to_s == "password"  -%>
+        <%%= f.input :<%= attribute.name %> %>
+      <%- end -%>
+      <%- if attribute.type.to_s == "text" -%>
+        <%%= f.input :<%= attribute.name %> %>
+      <%- end -%>
+      <%- if attribute.type.to_s == "integer" or attribute.type.to_s == "decimal" or attribute.type.to_s == "float"  -%>
+        <%%= f.input :<%= attribute.name %> %>
+      <%- end -%>
+      <%- if attribute.type.to_s == "date" -%>
+        <%%= f.input :<%= attribute.name %>, as: :string, input_html: {"data-controller": "datepicker", class: "flatpickr-config", value: formato_fecha_orden(@<%= singular_table_name %>.<%= attribute.name %>)  } %>
+      <%- end -%>
+      <%- if attribute.type.to_s  == "datetime" -%>
+        <%%= f.input :<%= attribute.name %>, as: :string, input_html: {"data-controller": "datepicker", class: "flatpickr-config", value: formato_date_local(@<%= singular_table_name %>.<%= attribute.name %>)  } %>
+      <%- end -%>
+      <%- if attribute.type.to_s == "boolean" -%>
+        <%%= f.input :<%= attribute.name %>, input_html: { class: "form-check form-switch form-check-custom form-check-solid"} %>
+      <%- end -%>
+      <%- if attribute.type.to_s == "references" -%>
+        <%%= f.association :<%= attribute.name %>, collection: <%= attribute.name.split('_').map(&:camelize).join('::') %>.all,  input_html:{ "data-controller": "select2", "data-placeholder": "Seleccione una opción", class: "content-search form-control"} %>
+      <%- end -%>
+      </div>
+    </div>
+  <%- end -%>
+  </div>
+
+  <div class="form-actions">
+    <%% if @<%= singular_table_name %>.new_record? %>
+      <%%= f.button :submit, "Nuevo <%= singular_table_name.split("_").map{|x| x.capitalize}.join(" ") %>", class: "btn btn-primary" %>
+    <%% else %>
+      <%%= f.button :submit, "Modificar <%= singular_table_name.split("_").map{|x| x.capitalize}.join(" ") %>", class: "btn btn-warning" %>
+    <%% end %>
+  </div>
+
+<%% end %>

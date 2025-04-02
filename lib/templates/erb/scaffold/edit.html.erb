@@ -1,0 +1,15 @@
+<div class="container">
+
+  <div class="card">
+    <div class="card-header">
+      <h1> Editar <%= singular_table_name.split("_").map{|x| x.capitalize}.join(" ") %></h1>
+    </div>
+    <div class="card-body">
+      <%%= render "form", <%= singular_table_name%>: @<%= singular_table_name %> %>
+    </div>
+    <div class="card-footer" style="margin-top: 25px;">
+      <%%= link_to '<i class="bi bi-arrow-left"></i>'.html_safe, <%= plural_table_name %>_path, class: "btn btn-primary rounded-circle" %>
+      <%%= link_to "<i class='bi bi-eye-fill'></i>".html_safe, @<%= singular_table_name%>, class: 'btn btn-primary rounded-circle float-right' %>
+    </div>
+  </div>
+</div>

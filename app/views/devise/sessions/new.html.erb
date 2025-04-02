@@ -1,0 +1,215 @@
+<style>
+  .logo-container {
+    margin-bottom: 2rem;
+  }
+
+  .brand-logo {
+    width: 180px;
+  }
+
+  .info-section {
+    height: 100%;
+    background-color: #0a2540;;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    padding: 2rem;
+  }
+
+  .info-content {
+    max-width: 500px;
+  }
+
+  .info-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .info-content p {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+  }
+
+  .card-icons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .card-icon {
+    width: 60px;
+    height: 40px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+  }
+
+  .feature-list {
+    margin-top: 2rem;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .feature-icon {
+    width: 24px;
+    height: 24px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+  }
+
+  .divider {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 2rem 0;
+    width: 100%;
+  }
+
+  .security-note {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 2rem;
+  }
+
+  .login-form-container h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+  }
+
+  .login-form-container p {
+    margin-bottom: 2rem;
+    color: var(--dark-gray);
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+    
+    .login-section, .info-section {
+      width: 100%;
+      padding: 2rem;
+    }
+    
+    .info-section {
+      order: -1;
+    }
+  }
+</style>
+<div id="auth">   
+  <div class="row h-100">
+    <div class="col-lg-5 col-12">
+      <div id="auth-left">
+        <div class="logo-container">
+          <div class="brand-logo">
+            <svg viewBox="0 0 100 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="30" height="30" rx="6" fill="#4f46e5"/>
+              <path d="M10 15L20 10L20 20L10 15Z" fill="white"/>
+              <path d="M40 8H45L48 17H48.5L51.5 8H56.5L50.5 22H46L40 8Z" fill="#0a2540"/>
+              <path d="M58 8H63V22H58V8Z" fill="#0a2540"/>
+              <path d="M65 8H70V10H70.5C71.5 8.5 73 7.5 75.5 7.5C79 7.5 81 9.5 81 13V22H76V14C76 12.5 75.5 11.5 73.5 11.5C71.5 11.5 70 12.5 70 15V22H65V8Z" fill="#0a2540"/>
+            </svg>
+          </div>
+        </div>
+    
+        <div class="login-form-container">
+          <% if resource_name.to_s == 'user' %>
+            <h1>Panel de Administración</h1>
+          <% else %>
+            <h1> Panel de Clientes </h1>
+          <% end %>
+          <p>Acceda al sistema de gestión de tarjetas </p>
+          <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <div class="form-inputs">
+              <%= f.input :email,
+                          required: false,
+                          autofocus: true,
+                          input_html: { autocomplete: "email" } %>
+              <%= f.input :password,
+                          required: false,
+                          input_html: { autocomplete: "current-password" } %>
+              <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+            </div>
+          
+            <div class="form-actions">
+              <%= f.button :submit, "Log in" %>
+            </div>
+          <% end %>
+        
+        
+          <%= render "devise/shared/links" %>
+          
+          <!-- <div class="text-center mt-5 text-lg fs-4">
+              <p class="text-gray-600">Don't have an account? <a href="auth-register.html" class="font-bold">Sign
+                      up</a>.</p>
+              <p><a class="font-bold" href="auth-forgot-password.html">Forgot password?</a>.</p>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-7 d-none d-lg-block">
+      <div id="auth-right">
+        <section class="info-section">
+          <div class="info-content">
+              <h2>Sistema de Administración de Tarjetas</h2>
+              <p>Plataforma segura para la gestión integral de tarjetas Visa y Mastercard con acceso exclusivo para administradores.</p>
+              
+              <div class="card-icons">
+                  <div class="card-icon">
+                      <svg width="40" height="12" viewBox="0 0 40 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M15.4 11.2H13L14.8 0.8H17.2L15.4 11.2Z" fill="#1434CB"/>
+                          <path d="M27.3 1C26.7 0.8 25.9 0.6 25 0.6C22.3 0.6 20.4 2 20.4 4C20.4 5.6 21.7 6.4 22.8 6.9C23.8 7.4 24.1 7.7 24.1 8.1C24.1 8.7 23.3 9 22.6 9C21.6 9 21.1 8.9 20.2 8.5L19.9 8.4L19.6 10.5C20.3 10.8 21.3 11 22.4 11C25.3 11 27.1 9.6 27.1 7.5C27.1 6.2 26.3 5.2 24.6 4.5C23.6 4 23 3.7 23 3.2C23 2.8 23.4 2.4 24.5 2.4C25.4 2.4 26 2.5 26.6 2.8L26.9 2.9L27.3 1Z" fill="#1434CB"/>
+                          <path d="M31.6 7.4C31.8 6.9 32.7 4.3 32.7 4.3C32.7 4.3 32.9 3.8 33 3.5L33.2 4.2C33.2 4.2 33.7 7 33.8 7.4H31.6ZM35.6 0.8H33.6C33 0.8 32.5 1 32.3 1.5L28 11.2H30.9C30.9 11.2 31.4 9.9 31.5 9.6H34.7C34.8 10 35 11.2 35 11.2H37.5L35.6 0.8Z" fill="#1434CB"/>
+                          <path d="M9.8 0.8L7.1 7.7L6.8 6.2C6.3 4.5 4.7 2.7 2.9 1.7L5.4 11.1H8.3L12.8 0.8H9.8Z" fill="#1434CB"/>
+                          <path d="M4.5 0.8H0.1L0 1C3.5 1.9 5.8 3.9 6.8 6.2L5.8 1.5C5.6 1 5.1 0.8 4.5 0.8Z" fill="#F79410"/>
+                      </svg>
+                  </div>
+                  <div class="card-icon">
+                      <svg width="40" height="24" viewBox="0 0 40 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M24.6 4H15.4V20H24.6V4Z" fill="#FF5F00"/>
+                          <path d="M16.1 12C16.1 8.8 17.6 5.9 20 4C18.2 2.6 15.9 1.8 13.5 1.8C7.7 1.8 3 6.5 3 12.2C3 17.9 7.7 22.6 13.4 22.6C15.9 22.6 18.2 21.8 20 20.4C17.6 18.4 16.1 15.5 16.1 12Z" fill="#EB001B"/>
+                          <path d="M37 12C37 17.7 32.3 22.4 26.6 22.4C24.1 22.4 21.8 21.6 20 20.2C22.4 18.2 23.9 15.3 23.9 11.8C23.9 8.6 22.4 5.7 20 3.7C21.8 2.3 24.1 1.5 26.5 1.5C32.3 1.6 37 6.3 37 12Z" fill="#F79E1B"/>
+                      </svg>
+                  </div>
+              </div>
+              
+              <div class="divider"></div>
+              
+              <div class="feature-list">
+                  <div class="feature-item">
+                      <div class="feature-icon">✓</div>
+                      <div>Monitoreo en tiempo real de transacciones</div>
+                  </div>
+                  <div class="feature-item">
+                      <div class="feature-icon">✓</div>
+                      <div>Reportes detallados y personalizables</div>
+                  </div>
+                  <div class="feature-item">
+                      <div class="feature-icon">✓</div>
+                      <div>Gestión integral de permisos</div>
+                  </div>
+                  <div class="feature-item">
+                      <div class="feature-icon">✓</div>
+                      <div>Detección avanzada de fraudes</div>
+                  </div>
+              </div>
+              
+              <p class="security-note">Este sistema está protegido con encriptación de extremo a extremo y autenticación de múltiples factores para garantizar la seguridad de los datos.</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>  
+</div>

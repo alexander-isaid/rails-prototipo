@@ -1,0 +1,39 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title">
+      <h1>Clientes</h1>
+      <%= link_to "Nuevo Cliente", new_cliente_path, class: 'btn btn-primary rounded-pill' %>
+    </h5>
+  </div>
+  <div class="card-body">
+    <%= render "filtros" %>
+    <div id="clientes">
+      <table id="tabla_clientes" class="table table-striped">
+        <thead>
+          <tr>
+
+              <th class="text-left"><%= sort_link @q, :email, "Email" %></th>
+
+              <th class="text-left"><%= sort_link @q, :password, "Password" %></th>
+
+              <th class="text-left"><%= sort_link @q, :password_confirmation, "Password Confirmation" %></th>
+
+              <th class="text-left"><%= sort_link @q, :name, "Name" %></th>
+
+              <th class="text-left"><%= sort_link @q, :rol, "Rol" %></th>
+            <td class="text-center">Ver</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @clientes.each do | cliente| %>
+            <%= render "rows",  cliente: cliente %>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @clientes, param_name: :pagina, pagination_class: "pagination-small pagination-centered" %>
+      
+    </div>
+  </div>
+</div>
+
+

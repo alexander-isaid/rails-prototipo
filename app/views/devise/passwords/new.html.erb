@@ -1,0 +1,43 @@
+<div id="auth">   
+  <div class="row h-100">
+    <div class="col-lg-5 col-12">
+      <div id="auth-left">
+          <div class="auth-logo">
+              <a href="#"><img src="/images/logo/logo-adminx.png" alt="Logo" style="width: 100px; height: auto; fit-object:cover;"></a>
+          </div>
+          <h2>Recuperar Contraseña</h2>
+
+          <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+            <%= f.error_notification %>
+          
+            <div class="form-inputs">
+              <%= f.input :email,
+                          required: true,
+                          autofocus: true,
+                          input_html: { autocomplete: "email" } %>
+            </div>
+          
+            <div class="form-actions">
+              <%= f.button :submit, "Send me reset password instructions" %>
+            </div>
+          <% end %>
+
+          <%= render "devise/shared/links" %>
+
+          <!-- <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p> -->
+         
+          
+          <!-- <div class="text-center mt-5 text-lg fs-4">
+              <p class="text-gray-600">Don't have an account? <a href="auth-register.html" class="font-bold">Sign
+                      up</a>.</p>
+              <p><a class="font-bold" href="auth-forgot-password.html">Forgot password?</a>.</p>
+          </div> -->
+      </div>
+    </div>
+    <div class="col-lg-7 d-none d-lg-block">
+      <div id="auth-right">
+
+      </div>
+    </div>
+  </div>  
+</div>

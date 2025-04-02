@@ -1,0 +1,16 @@
+<tr data-turbo="false">
+  <%- attributes.reject(&:password_digest?).each do |attribute| -%>
+  <%- if attribute.type.to_s == "references" -%>
+    <td><%%= <%= singular_table_name %>.<%= attribute.name %>.name %></td>
+  <%- else -%>
+    <td><%%= <%= singular_table_name%>.<%= attribute.name %> %></td>
+  <%- end -%>
+  <%- end -%>
+    <td class="text-center">
+      <div class="btn-group" role="group">
+        <%%= link_to "<i class='bi bi-eye-fill'></i>".html_safe, <%= singular_table_name %>, class: 'btn btn-primary rounded-circle' %>
+        <%%= link_to "<i class='bi bi-pencil-fill'></i>".html_safe, edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: 'btn btn-primary rounded-circle' %>
+        <%%= link_to "<i class='bi bi-archive-fill'></i>".html_safe, <%= singular_table_name %>, method: :delete, data: { confirm: 'Esta seguro de eliminar este registro!!' }, class: 'btn btn-primary rounded-circle' %>
+      </div>
+    </td>
+</tr>

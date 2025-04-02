@@ -1,0 +1,26 @@
+<div class="container">
+
+  <div class="card">
+    <div class="card-body">
+    <%- attributes.each do |attribute| -%>
+      <div class="row border-bottom">
+        <%- if attribute.type.to_s == "references" -%>
+          <div class="col-md-2 p-3 "><b><%= attribute.name.capitalize %>:</b></div>
+          <div class="col-md-4 p-3 "><%%= @<%= singular_table_name %>.<%= attribute.name %>.name %></div>
+        <%- else -%>
+          <div class="col-md-2 p-3 "><b><%= attribute.name.capitalize %>:</b></div>
+          <div class="col-md-4 p-3 "><%%= @<%= singular_table_name %>.<%= attribute.name %> %></div>
+        <%- end -%>
+      </div>
+    <%- end -%>
+
+
+      <%%= link_to '<i class="bi bi-pencil-fill"></i> Editar'.html_safe,  edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: 'btn btn-warning' %>
+    </div>
+
+    <div class="card-footer" style="margin-top: 25px;">
+      <%%= link_to '<i class="bi bi-arrow-left"></i>'.html_safe, <%= plural_table_name %>_path, class: "btn btn-primary rounded-circle" %>
+      <%%= link_to '<i class="bi bi-trash3"></i>'.html_safe, @<%= singular_table_name %>, data: {turbo_method: :delete, turbo_confirm: "Esta seguro de eleiminar este registro"} , class: 'btn btn-danger rounded-circle float-right' %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title">
+      <h1><%= plural_table_name.split("_").map{|x| x.capitalize}.join(" ") %></h1>
+      <%%= link_to "Nuevo <%= singular_table_name.split("_").map{|x| x.capitalize}.join(" ") %>", new_<%= singular_table_name %>_path, class: 'btn btn-primary rounded-pill' %>
+    </h5>
+  </div>
+  <div class="card-body">
+    <%%= render "filtros" %>
+    <div id="<%= plural_table_name %>">
+      <table id="tabla_<%= plural_table_name %>" class="table table-striped">
+        <thead>
+          <tr>
+          <%- attributes.each do |attribute| -%>
+
+            <%- if attribute.type.to_s != "references" -%>
+              <%- if attribute.type.to_s != "text" -%>
+              <th class="text-left"><%%= sort_link @q, :<%= attribute.name %>, "<%= attribute.name.split("_").map{|x| x.capitalize}.join(" ") %>" %></th>
+              <%- end -%>
+            <%- else -%>
+              <th class="text-left"><%%= sort_link @q, :<%= attribute.name %>_id, "<%= attribute.name.split("_").map{|x| x.capitalize}.join(" ") %>" %></th>
+            <%- end -%>
+          <%- end -%>
+            <td class="text-center">Ver</td>
+          </tr>
+        </thead>
+        <tbody>
+          <%% @<%= plural_table_name %>.each do | <%=singular_table_name %>| %>
+            <%%= render "rows",  <%= singular_table_name %>: <%= singular_table_name %> %>
+          <%% end %>
+        </tbody>
+      </table>
+      <%%= paginate @<%= plural_table_name %>, param_name: :pagina, pagination_class: "pagination-small pagination-centered" %>
+      
+    </div>
+  </div>
+</div>
+
+

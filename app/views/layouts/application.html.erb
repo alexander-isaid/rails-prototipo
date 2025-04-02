@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Prototipo</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload",  defer: true, type: "module" %>
+
+
+  </head>
+
+  <body>
+    <% if flash[:success] %>
+      <script>
+        Swal.fire({
+          title: '¡Éxito!',
+          text: '<%= flash[:success] %>',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        });
+      </script>
+    <% end %>
+
+    <% if flash[:error] %>
+      <script>
+        Swal.fire({
+          icon: 'error',
+          title: '¡Error!',
+          text: '<%= flash[:error] %>',
+          footer: '<a href="#">Why do I have this issue?</a>',
+          confirmButtonText: 'Aceptar'
+        });
+      </script>
+    <% end %>
+
+
+    <div id="app">
+      <% if usuario_signed_in? %>
+        <%= render 'partials/sidebar' %>    
+        <div id="main" class="layout-navbar navbar-fixed">
+          <%= render 'partials/navbar' %>
+          <div id="main-content">
+            <%= render 'partials/flash' %>
+            <%= yield %>
+          </div>
+          <%= render 'partials/footer' %>
+        </div>
+      <% else %>
+        <%= yield %>
+      <%end%>
+    </div>
+  </body>
+</html>

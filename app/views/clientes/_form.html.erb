@@ -1,0 +1,43 @@
+
+<%= simple_form_for(@cliente, data: { controller: "block-ui-form" }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+
+    <div class="row border-bottom">
+      <div class="col-md-12 pt-3">
+        <%= f.input :email %>
+      </div>
+    </div>
+    <div class="row border-bottom">
+      <div class="col-md-12 pt-3">
+        <%= f.input :password %>
+      </div>
+    </div>
+    <div class="row border-bottom">
+      <div class="col-md-12 pt-3">
+        <%= f.input :password_confirmation %>
+      </div>
+    </div>
+    <div class="row border-bottom">
+      <div class="col-md-12 pt-3">
+        <%= f.input :name %>
+      </div>
+    </div>
+    <div class="row border-bottom">
+      <div class="col-md-12 pt-3">
+        <%= f.input :rol %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <% if @cliente.new_record? %>
+      <%= f.button :submit, "Nuevo Cliente", class: "btn btn-primary" %>
+    <% else %>
+      <%= f.button :submit, "Modificar Cliente", class: "btn btn-warning" %>
+    <% end %>
+  </div>
+
+<% end %>

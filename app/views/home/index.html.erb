@@ -1,0 +1,5 @@
+
+<% unless current_usuario.present? %>
+    <%= link_to "LogIn Users", new_user_session_path, class: "btn btn-primary" %>
+    <%= link_to "LogIn Client", new_client_session_path, class: "btn btn-primary" %>
+<% end %> 

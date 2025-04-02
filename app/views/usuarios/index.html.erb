@@ -1,0 +1,32 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title">
+      <h1>Usuarios</h1>
+      <%= link_to "Nuevo Usuario", new_usuario_path, class: 'btn btn-primary rounded-pill' %>
+    </h5>
+  </div>
+  <div class="card-body">
+    <%= render "filtros" %>
+    <div id="usuarios">
+      <table id="tabla_usuarios" class="table table-striped">
+        <thead>
+          <tr>
+            <th class="text-left"><%= sort_link @q, :email, "Email" %></th>
+            <th class="text-left"><%= sort_link @q, :name, "Name" %></th>
+            <th class="text-left"><%= sort_link @q, :rol, "Rol" %></th>
+            <td class="text-center">Ver</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @usuarios.each do | usuario| %>
+            <%= render "rows",  usuario: usuario %>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @usuarios, param_name: :pagina, pagination_class: "pagination-small pagination-centered" %>
+      
+    </div>
+  </div>
+</div>
+
+

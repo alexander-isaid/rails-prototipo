@@ -1,0 +1,41 @@
+<div id="div-busqueda" class="card-body border-bottom">
+    <%%= search_form_for @q , html: {"data-controller": "filters", "data-turbo-frame": "table"} do |f| %>
+      <table class="table" style=" table-layout: fixed;">
+        <thead>
+          <tr>
+        <%- attributes.reject(&:password_digest?).each do |attribute| -%>
+        <%- if attribute.type.to_s == "references" -%>
+            <th>
+                <label><%= attribute.name.split("_").map{|x| x.capitalize}.join(" ") %></label>
+                <%%= f.select :<%= attribute.name %>_id_eq, <%= attribute.name.split('_').map(&:camelize).join('::') %>.all.map{|a| [a.name, a.id]}, { include_blank: "Todos" }, class: 'form-control',  "data-action": "filters#submit" %>
+            </th>
+        <%- else -%>
+            <th>
+                <label><%= attribute.name.split("_").map{|x| x.capitalize}.join(" ") %></label>
+            <%- if attribute.type.to_s == "string" or attribute.type.to_s == "password" -%>
+                <%%= f.search_field :<%= attribute.name %>_cont, class: 'form-control', "data-action": "filters#submit", placeholder:""  %>
+            <%- end -%>
+            <%- if attribute.type.to_s == "integer" or attribute.type.to_s == "decimal" or attribute.type.to_s == "float" -%>
+                <%%= f.number_field :<%= attribute.name %>_gt, class: 'form-control', "data-action": "filters#submit", placeholder: "desde"  %>
+                <%%= f.number_field :<%= attribute.name %>_lt, class: 'form-control', "data-action": "filters#submit", placeholder: "hasta"  %>
+            <%- end -%>
+            <%- if attribute.type.to_s == "boolean"-%>
+                <%%= f.select :<%= attribute.name %>_eq, [['Sí', true], ['No', false]], { include_blank: "Todos" }, class: 'form-control',  "data-action": "filters#submit" %>
+            <%- end -%>
+            <%- if attribute.type.to_s == "date" or attribute.type.to_s == "datetime" -%>
+                <%%= f.date_field :<%= attribute.name %>_gteq, class: 'form-control', "data-action": "filters#submit", placeholder: "desde"  %>
+                <%%= f.date_field :<%= attribute.name %>_lteq, class: 'form-control', "data-action": "filters#submit", placeholder: "hasta"  %>
+            <%- end -%>
+            </th>
+        <%- end -%>
+        <%- end -%>
+        
+            <th>
+                <%%= f.submit "Buscar!", class: 'btn btn-primary' %> 
+                <a href="/<%= plural_table_name %>" id="clear_search" class="btn btn-secondary">Todos!!</a>
+            </th>
+          </tr>
+        </thead>
+      </table>
+    <%% end %>
+  </div>

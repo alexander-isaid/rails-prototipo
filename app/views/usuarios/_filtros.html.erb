@@ -1,0 +1,26 @@
+<div id="div-busqueda" class="card-body border-bottom">
+    <%= search_form_for @q , html: {"data-controller": "filters", "data-turbo-frame": "table"} do |f| %>
+      <table class="table" style=" table-layout: fixed;">
+        <thead>
+          <tr>
+            <th>
+              <label>Email</label>
+              <%= f.search_field :email_cont, class: 'form-control', "data-action": "filters#submit", placeholder:""  %>
+            </th>
+            <th>
+              <label>Name</label>
+              <%= f.search_field :name_cont, class: 'form-control', "data-action": "filters#submit", placeholder:""  %>
+            </th>
+            <th>
+              <label>Rol</label>
+              <%= f.search_field :rol_cont, class: 'form-control', "data-action": "filters#submit", placeholder:""  %>
+            </th>
+            <th>
+              <%= f.submit "Buscar!", class: 'btn btn-primary' %> 
+              <a href="/usuarios" id="clear_search" class="btn btn-secondary">Todos!!</a>
+            </th>
+          </tr>
+        </thead>
+      </table>
+    <% end %>
+  </div>
