@@ -12,3 +12,24 @@
 @use 'select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme';
 
 @use 'flatpickr/dist/flatpickr.min.css';
+
+#screen-blocker {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 9999;
+  }
+
+  .overlay {
+    position: absolute;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+  }
+
+  .loader {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.5em;
+  }

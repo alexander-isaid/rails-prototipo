@@ -22,6 +22,15 @@ const dropdownElementList = document.querySelectorAll('.dropdown-toggle')
 const dropdownList = [...dropdownElementList].map(dropdownToggleEl => new bootstrap.Dropdown(dropdownToggleEl))
 
 document.addEventListener("turbo:load", () => {
+
+    const forms = document.querySelectorAll("form");
+    const blocker = document.getElementById("screen-blocker");
+
+    forms.forEach(function (form) {
+        form.addEventListener("submit", function () {
+            if (blocker) blocker.style.display = "block";
+        });
+    });
     
     initTheme();
     const toggler = document.getElementById("toggle-dark")

@@ -1,0 +1,38 @@
+
+<%= simple_form_for(@post, data: { controller: "block-ui-form" }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+
+    <div class="row border-bottom">
+      <div class="col-md-12 pt-3">
+        <%= f.input :titulo %>
+      </div>
+    </div>
+    <div class="row border-bottom">
+      <div class="col-md-12 pt-3">
+        <%= f.input :descripcion %>
+      </div>
+    </div>
+    <div class="row border-bottom">
+      <div class="col-md-12 pt-3">
+        <%= f.input :fecha_creacion, as: :string, input_html: {"data-controller": "datepicker", class: "flatpickr-config", value: formato_date_local(@post.fecha_creacion)  } %>
+      </div>
+    </div>
+    <div class="row border-bottom">
+      <div class="col-md-12 pt-3">
+        <%= f.association :user, collection: User.all,  input_html:{ "data-controller": "select2", "data-placeholder": "Seleccione una opción", class: "content-search form-control"} %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <% if @post.new_record? %>
+      <%= f.button :submit, "Nuevo Post", class: "btn btn-primary" %>
+    <% else %>
+      <%= f.button :submit, "Modificar Post", class: "btn btn-warning" %>
+    <% end %>
+  </div>
+
+<% end %>

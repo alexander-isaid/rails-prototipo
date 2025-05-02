@@ -5,10 +5,10 @@
     <%- attributes.each do |attribute| -%>
       <div class="row border-bottom">
         <%- if attribute.type.to_s == "references" -%>
-          <div class="col-md-2 p-3 "><b><%= attribute.name.capitalize %>:</b></div>
+          <div class="col-md-2 p-3 "><b><%= attribute.name.split("_").map{|x| x.capitalize}.join(" ") %>:</b></div>
           <div class="col-md-4 p-3 "><%%= @<%= singular_table_name %>.<%= attribute.name %>.name %></div>
         <%- else -%>
-          <div class="col-md-2 p-3 "><b><%= attribute.name.capitalize %>:</b></div>
+          <div class="col-md-2 p-3 "><b><%= attribute.name.split("_").map{|x| x.capitalize}.join(" ") %>:</b></div>
           <div class="col-md-4 p-3 "><%%= @<%= singular_table_name %>.<%= attribute.name %> %></div>
         <%- end -%>
       </div>

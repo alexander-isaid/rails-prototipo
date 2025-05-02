@@ -85,3 +85,4 @@ gem 'active_hash'
 gem 'aws-sdk-s3', require: false
 gem 'dynamoid'
 gem 'wicked_pdf'
+gem 'hexapdf', '~> 1.2'

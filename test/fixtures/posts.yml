@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: posts
+#
+#  id             :bigint           not null, primary key
+#  descripcion    :string
+#  fecha_creacion :datetime
+#  titulo         :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  user_id        :bigint           not null
+#
+# Indexes
+#
+#  index_posts_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
+#
+
+one:
+  titulo: MyString
+  descripcion: MyString
+  fecha_creacion: 2025-04-03 16:20:20
+  user: one
+
+two:
+  titulo: MyString
+  descripcion: MyString
+  fecha_creacion: 2025-04-03 16:20:20
+  user: two
