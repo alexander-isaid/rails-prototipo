@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :posts
   resources :clientes
   resources :posts do
     member do
